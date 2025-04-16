@@ -16,10 +16,18 @@ function Home() {
   return (
     <div>
       <h2 id="homeHeading">Home</h2>
-      <button className="sign-in-button" onClick={handleSignInClick}>
-        Sign In
-      </button>
 
+      {/* Navigation Bar */}
+      <nav>
+        <ul>
+          <li><Link to="/">Home</Link></li>
+          <li><Link to="/about">About</Link></li>
+          <li><Link to="/services">Services</Link></li>
+          <li><button className="sign-in-button nav-signin" onClick={handleSignInClick}>Sign In</button></li>
+        </ul>
+      </nav>
+
+      {/* Prompt Modal */}
       {showPrompt && (
         <div className="prompt">
           <div className="prompt-content">

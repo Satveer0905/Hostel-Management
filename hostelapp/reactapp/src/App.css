@@ -1,23 +1,37 @@
+/* App.css */
+
 .app-container #root {
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+  background: linear-gradient(135deg, #ff7a8a, #ffb6c1); /* Gradient background */
+  border-radius: 15px; /* Rounded corners for the app container */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
 }
 
 .app-container .logo {
   height: 6em;
   padding: 1.5em;
   will-change: filter;
-  transition: filter 300ms;
-}
-.app-container .logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.app-container .logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+  transition: filter 300ms, transform 300ms; /* Added smooth transform transition */
+  border-radius: 10px;
+  background: #fff; /* White background for logo */
+  display: inline-block;
+  margin-bottom: 2rem;
 }
 
+.app-container .logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+  transform: scale(1.1); /* Slight zoom effect on hover */
+}
+
+.app-container .logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+  transform: scale(1.1);
+}
+
+/* Spinning animation */
 @keyframes logo-spin {
   from {
     transform: rotate(0deg);
@@ -35,8 +49,57 @@
 
 .app-container .card {
   padding: 2em;
+  background: #fff;
+  border-radius: 10px; /* Rounded corners for cards */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  transition: box-shadow 0.3s ease, transform 0.3s ease; /* Smooth transition */
 }
 
+.app-container .card:hover {
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15); /* Darker shadow on hover */
+  transform: translateY(-5px); /* Slight lift effect on hover */
+}
+
+/* Colorful, creative links */
 .app-container .read-the-docs {
   color: #888;
+  font-size: 1.2rem;
+  margin-top: 1rem;
+  text-decoration: none;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.app-container .read-the-docs:hover {
+  color: #ff7a8a; /* Change color on hover */
+  transform: translateY(-2px); /* Slight lift effect */
+}
+
+.app-container .card h3 {
+  color: #333;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  font-weight: bold;
+}
+
+.app-container .card p {
+  color: #555;
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+/* Button styles inside card */
+.app-container .card .btn {
+  padding: 12px 20px;
+  background-color: #ff7a8a;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  font-weight: bold;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.app-container .card .btn:hover {
+  background-color: #ff4b5c; /* Darker pink shade */
+  transform: translateY(-3px); /* Slight lift effect */
 }

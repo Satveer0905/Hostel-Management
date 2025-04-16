@@ -1,7 +1,7 @@
 /* Registration.css */
 
 body {
-    background-color: #f0f4f8; /* Light background color */
+    background: linear-gradient(to right, #ff7a8a, #f3b7da); /* Soft gradient background */
     font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
@@ -12,89 +12,94 @@ body {
 }
 
 .registration-wrapper {
-    width: 100%; /* Full width for the wrapper */
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 .registration-container {
-    max-width: 400px;
+    max-width: 450px;
     padding: 30px;
-    background: white; /* White background for the form */
-    border: 2px solid #00796b; /* Border color */
-    border-radius: 15px; /* Rounded corners for the container */
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-    transition: transform 0.3s; /* Smooth hover effect */
+    background: white;
+    border: 2px solid #f06292; /* Border color with a vibrant pink */
+    border-radius: 15px;
+    box-shadow: 0 6px 30px rgba(0, 0, 0, 0.1); /* Deep shadow effect */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .registration-container:hover {
-    transform: translateY(-5px); /* Lift effect on hover */
+    transform: translateY(-5px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2); /* Enhanced shadow effect */
 }
 
 #registrationHeading {
     text-align: center;
-    color: white; /* White text color */
+    color: white;
     padding: 15px;
-    background-color: #00796b; /* Background color for the heading */
-    border-radius: 10px; /* Rounded corners */
-    width: 90%; /* Change this as needed */
-    margin: 0 auto; /* Center it horizontally */
+    background: linear-gradient(135deg, #ff00cc, #3333ff); /* Vibrant pink background */
+    border-radius: 10px;
+    width: 85%;
+    margin: 0 auto;
+    font-size: 2rem;
+    font-weight: 700;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
 }
 
 .form-group {
-    margin-bottom: 20px; /* Space between form groups */
+    margin-bottom: 20px;
 }
 
 label {
-    font-weight: bold; /* Bold labels */
-    color: #555; /* Slightly lighter text color */
-}
-
-/* Styles for the user type radio buttons */
-.form-group div {
-    display: flex; /* Flexbox for horizontal alignment */
-    justify-content: space-between; /* Space between radio buttons */
-    margin-top: 10px; /* Space above the radio buttons */
+    font-weight: bold;
+    color: #333;
+    font-size: 1.1rem;
 }
 
 input[type="radio"] {
-    margin-right: 5px; /* Space between radio button and label */
+    margin-right: 8px;
+    transition: transform 0.3s ease;
+}
+
+input[type="radio"]:hover {
+    transform: scale(1.2);
 }
 
 .form-control {
     width: 100%;
-    padding: 10px; /* Padding for input fields */
-    border: 1px solid #ccc; /* Light border */
-    border-radius: 5px; /* Rounded corners for inputs */
-    transition: border-color 0.3s; /* Smooth border color change */
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .form-control:focus {
-    border-color: #00796b; /* Change border color on focus */
-    outline: none; /* Remove default outline */
-    box-shadow: 0 0 5px rgba(0, 121, 107, 0.5); /* Subtle glow effect */
+    border-color: #f230e8;
+    outline: none;
+    box-shadow: 0 0 5px rgba(240, 98, 146, 0.5);
 }
 
 .btn {
     width: 100%;
-    padding: 10px;
-    background-color: #00796b; /* Primary button color */
-    color: white; /* White text color */
-    border: none; /* No border */
-    border-radius: 5px; /* Rounded corners */
-    cursor: pointer; /* Pointer cursor on hover */
-    font-size: 1em; /* Font size for button */
-    transition: background-color 0.3s, transform 0.3s; /* Smooth transitions */
+    padding: 12px;
+    background-color: #ff7a8a;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
 .btn:hover {
-    background-color: #005b4f; /* Darker shade on hover */
-    transform: translateY(-2px); /* Lift effect on hover */
+    background-color: #f06292;
+    transform: translateY(-3px);
 }
 
 .form-text {
-    color: #777; /* Lighter text color for help text */
-    font-size: 0.9em; /* Smaller font size */
-    text-align: center; /* Centered text */
+    color: #777;
+    font-size: 0.9rem;
+    text-align: center;
 }

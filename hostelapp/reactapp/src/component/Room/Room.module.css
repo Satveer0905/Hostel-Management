@@ -1,0 +1,158 @@
+.room-management {
+  padding: 30px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(to right, #fdfbfb, #ebedee);
+  min-height: 100vh;
+}
+
+.room-management h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.room-management input[type="text"] {
+  padding: 10px;
+  width: 100%;
+  max-width: 400px;
+  margin-bottom: 25px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  transition: border 0.3s;
+}
+
+.room-management input[type="text"]:focus {
+  border-color: #00bcd4;
+  outline: none;
+}
+
+.room-types {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.room-type {
+  background: #ffffff;
+  border-radius: 15px;
+  padding: 20px;
+  width: 280px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.25s;
+}
+
+.room-type:hover {
+  transform: translateY(-5px);
+}
+
+.room-type h3 {
+  margin-top: 0;
+  color: #00796b;
+  font-size: 1.4em;
+}
+
+.room-type p {
+  margin: 10px 0;
+  color: #444;
+  font-weight: 500;
+}
+
+.room-type button {
+  background-color: #00bcd4;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 12px;
+  margin: 6px 6px 0 0;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.room-type button:hover {
+  background-color: #0097a7;
+}
+
+.room-type button:nth-child(3) {
+  background-color: #ffc107;
+}
+
+.room-type button:nth-child(3):hover {
+  background-color: #ffb300;
+}
+
+.room-type button:last-child {
+  background-color: #f44336;
+}
+
+.room-type button:last-child:hover {
+  background-color: #d32f2f;
+}
+
+.add-room {
+  margin-top: 40px;
+  text-align: center;
+}
+
+.add-room h3 {
+  margin-bottom: 15px;
+  color: #00796b;
+}
+
+.add-room input {
+  padding: 10px;
+  margin-right: 10px;
+  width: 250px;
+  border-radius: 8px;
+  border: 2px solid #ddd;
+  transition: border 0.3s;
+}
+
+.add-room input:focus {
+  border-color: #00bcd4;
+  outline: none;
+}
+
+.add-room button {
+  padding: 10px 15px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+.add-room button:hover {
+  background-color: #388e3c;
+}
+
+.message-box {
+  background-color: #e0f7fa;
+  padding: 12px;
+  margin-bottom: 20px;
+  border: 2px solid #4dd0e1;
+  border-radius: 8px;
+  color: #00796b;
+  font-weight: bold;
+  box-shadow: 0 0 10px rgba(0, 188, 212, 0.2);
+  text-align: center;
+}
+.alloc-form input {
+  margin: 5px 0;
+  padding: 6px;
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.student-details {
+  background: #f1f8e9;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-left: 5px solid #8bc34a;
+  border-radius: 6px;
+}
