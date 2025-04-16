@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import './AdminDashboard.css'; // Import the CSS file
+import Room from './Room'; // Import the Room component
 
 function AdminDashboard() {
   const navigate = useNavigate(); // Initialize useNavigate
@@ -48,6 +49,9 @@ function AdminDashboard() {
             <li>Maintenance request for Room 202</li>
             <li>New student registered: Jane Smith</li>
           </ul>
+        </section>
+        <section className="card">
+          <Room /> {/* Include the Room component */}
         </section>
       </main>
     </div>
