@@ -26,7 +26,7 @@ function Home() {
           <li><Link to="/" onClick={() => setMenuOpen(false)}>Home</Link></li>
           <li><Link to="/features" onClick={() => setMenuOpen(false)}>Features</Link></li>
           <li><Link to="/about" onClick={() => setMenuOpen(false)}>About</Link></li>
-          <li><Link to="/login" onClick={() => setMenuOpen(false)}>Login/Register</Link></li>
+          <li><Link to="/register" onClick={() => setMenuOpen(false)}>Register</Link></li>
           <li><Link to="/contact" onClick={() => setMenuOpen(false)}>Contact</Link></li>
         </ul>
       </header>

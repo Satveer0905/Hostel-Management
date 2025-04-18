@@ -24,7 +24,7 @@ function AdminDashboard() {
             <li onClick={() => navigate('/rooms')}>Room</li>
             <li>Maintenance</li>
             <li>Reports</li>
-            <li>Settings</li>
+            {/* <li>Settings</li> */}
           </ul>
         </nav>
       </header>
