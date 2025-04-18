@@ -1,0 +1,47 @@
+.about-page {
+    padding: 80px 20px;
+    background: linear-gradient(to right, #d7f5fd, #ffe3ec);
+    color: #2e2d2d;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 80vh;
+  }
+  
+  .about-header {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  
+  .about-header h1 {
+    font-size: 2.8rem;
+    font-weight: bold;
+    color: #6200ea;
+    margin-bottom: 10px;
+  }
+  
+  .about-header p {
+    font-size: 1.2rem;
+    color: #444;
+  }
+  
+  .about-content {
+    max-width: 900px;
+    width: 100%;
+    background: #ffffffee;
+    border-radius: 16px;
+    padding: 40px 30px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    line-height: 1.8;
+    font-size: 1.05rem;
+    color: #333;
+  }
+  
+  .about-content p {
+    margin-bottom: 20px;
+  }
+  
+  .about-content strong {
+    color: #6200ea;
+  }
+  

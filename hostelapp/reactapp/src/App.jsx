@@ -3,6 +3,8 @@ import './App.css';
 import Registration from './component/Registration';
 import Login from './component/Login';
 import Home from './component/Home';
+import Contact from './component/Contact';
+import About from './component/About';
 import AdminDashboard from './component/Admin/AdminDashboard';
 import StudentDashboard from './component/Student/StudentDashboard';
 import Room from './component/Room/Room';
@@ -14,6 +16,8 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/register" element={<Registration />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/about" element={<About />} />
         <Route path="/AdminDashboard" element={<AdminDashboard />} />
         <Route path="/StudentDashboard" element={<StudentDashboard />} />
         <Route path="/rooms" element={<Room />} />

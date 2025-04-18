@@ -4,6 +4,7 @@ import './Home.css';
 
 function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [popupVisible, setPopupVisible] = useState(false); // ✅ added missing state
 
   return (
     <div className="home-container">
@@ -26,7 +27,27 @@ function Home() {
           <li><Link to="/" onClick={() => setMenuOpen(false)}>Home</Link></li>
           <li><Link to="/features" onClick={() => setMenuOpen(false)}>Features</Link></li>
           <li><Link to="/about" onClick={() => setMenuOpen(false)}>About</Link></li>
-          <li><Link to="/register" onClick={() => setMenuOpen(false)}>Register</Link></li>
+
+          {/* Hover Register with Popup */}
+          <li
+            onMouseEnter={() => setPopupVisible(true)}
+            onMouseLeave={() => setPopupVisible(false)}
+            style={{ position: 'relative' }}
+          >
+            <span className="nav-link">Sign In</span>
+            {popupVisible && (
+  <div className="popup">
+    <Link to="/login" onClick={() => { setMenuOpen(false); setPopupVisible(false); }}>
+      Login
+    </Link>
+    <Link to="/register" onClick={() => { setMenuOpen(false); setPopupVisible(false); }}>
+      Register
+    </Link>
+  </div>
+)}
+
+          </li>
+
           <li><Link to="/contact" onClick={() => setMenuOpen(false)}>Contact</Link></li>
         </ul>
       </header>
