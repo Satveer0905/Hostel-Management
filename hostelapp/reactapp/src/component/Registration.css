@@ -1,105 +1,96 @@
 /* Registration.css */
 
-body {
-    background: linear-gradient(to right, #ff7a8a, #f3b7da); /* Soft gradient background */
-    font-family: 'Arial', sans-serif;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-}
-
+/* Wrapper with theme-aligned background and center layout */
 .registration-wrapper {
-    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-.registration-container {
-    max-width: 450px;
-    padding: 30px;
-    background: white;
-    border: 2px solid #f06292; /* Border color with a vibrant pink */
-    border-radius: 15px;
-    box-shadow: 0 6px 30px rgba(0, 0, 0, 0.1); /* Deep shadow effect */
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.registration-container:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2); /* Enhanced shadow effect */
-}
-
-#registrationHeading {
+    min-height: 100vh;
+    background: linear-gradient(to right, #d7f5fd, #ffe3ec);
+    padding: 20px;
+  }
+  
+  /* Main form container */
+  .registration-container {
+    background: #ffffffee;
+    border-radius: 20px;
+    padding: 40px 30px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    max-width: 480px;
+    width: 100%;
+  }
+  
+  /* Heading */
+  #registrationHeading {
     text-align: center;
-    color: white;
-    padding: 15px;
-    background: linear-gradient(135deg, #ff00cc, #3333ff); /* Vibrant pink background */
-    border-radius: 10px;
-    width: 93%;
-    margin: 0 auto;
     font-size: 2rem;
-    font-weight: 700;
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
-}
-
-.form-group {
+    font-weight: bold;
+    color: #6200ea;
+    margin-bottom: 25px;
+  }
+  
+  /* Form Group Spacing */
+  .registration-container .form-group {
     margin-bottom: 20px;
-}
-
-label {
-    font-weight: bold;
-    color: #333;
-    font-size: 1.1rem;
-}
-
-input[type="radio"] {
-    margin-right: 8px;
-    transition: transform 0.3s ease;
-}
-
-input[type="radio"]:hover {
-    transform: scale(1.2);
-}
-
-.form-control {
-    width: 100%;
-    padding: 12px;
+  }
+  
+  /* Input fields */
+  .registration-container .form-control {
+    border-radius: 8px;
+    padding: 10px 14px;
     border: 1px solid #ccc;
-    border-radius: 8px;
-    font-size: 1rem;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-.form-control:focus {
-    border-color: #f230e8;
-    outline: none;
-    box-shadow: 0 0 5px rgba(240, 98, 146, 0.5);
-}
-
-.btn {
-    width: 100%;
-    padding: 12px;
-    background-color: #ff7a8a;
-    color: white;
+    transition: border 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .registration-container .form-control:focus {
+    border-color: #6200ea;
+    box-shadow: 0 0 0 0.15rem rgba(98, 0, 234, 0.25);
+  }
+  
+  /* Radio buttons */
+  .registration-container input[type="radio"] {
+    margin-right: 6px;
+  }
+  
+  .registration-container label {
+    font-weight: 500;
+    color: #333;
+    margin-right: 20px;
+    display: inline-flex;
+    align-items: center;
+  }
+  
+  /* Submit Button */
+  .registration-container .btn-primary {
+    background: linear-gradient(45deg, #6200ea, #a770ef);
     border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 1.1rem;
-    font-weight: bold;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-}
-
-.btn:hover {
-    background-color: #f06292;
-    transform: translateY(-3px);
-}
-
-.form-text {
-    color: #777;
+    border-radius: 30px;
+    padding: 10px 20px;
+    font-weight: 600;
+    width: 100%;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+  }
+  
+  .registration-container .btn-primary:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+  }
+  
+  /* Optional helper text */
+  .registration-container .form-text {
     font-size: 0.9rem;
-    text-align: center;
-}
+    color: #777;
+  }
+  
+  /* Responsive tweaks */
+  @media (max-width: 500px) {
+    .registration-container {
+      padding: 25px 20px;
+    }
+  
+    #registrationHeading {
+      font-size: 1.6rem;
+    }
+  }
+  
