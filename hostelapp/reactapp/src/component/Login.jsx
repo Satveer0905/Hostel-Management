@@ -4,76 +4,97 @@ import './Login.css';
 
 function Login() {
   const navigate = useNavigate();
-  const [role, setRole] = useState('student'); // Default role
-  const [loading, setLoading] = useState(false); // Loading state
-  const [error, setError] = useState(''); // Error message state
+  const [role, setRole] = useState('student');
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
 
-  async function sendData(e) {
+  const sendData = async (e) => {
     e.preventDefault();
-    setLoading(true); // Set loading to true
-    setError(''); // Reset error message
+    setLoading(true);
+    setError('');
 
-    const email = e.target.email.value;
+    const email = e.target.email.value.trim();
     const password = e.target.password.value;
 
-    const response = await fetch("http://localhost:3005/login", {
-      method: "POST",
-      body: JSON.stringify({ email, password, role }),
-      headers: { 'Content-Type': 'application/json' },
-    });
+    try {
+      const response = await fetch("http://localhost:3005/login", {
+        method: "POST",
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password, role }),
+      });
 
-    const res = await response.json();
-    setLoading(false); // Set loading to false
+      const res = await response.json();
+      setLoading(false);
 
-    if (res.msg == "success") {
-      navigate(role == 'administrator' ? "/AdminDashboard" : "/StudentDashboard");
-    } else {
-      setError(res.msg); // Set error message if login fails
+      if (res.msg === "success") {
+        navigate(role === 'administrator' ? "/AdminDashboard" : "/StudentDashboard");
+      } else {
+        setError(res.msg || 'Login failed. Please try again.');
+      }
+    } catch (err) {
+      setLoading(false);
+      setError('Something went wrong. Please try again later.');
     }
-  }
+  };
 
   return (
     <div className="login-container">
-      <h2 id="loginHeading">Login</h2>
-      <form onSubmit={sendData}>
-        <div className="form-group">
-          <label htmlFor="role">Select Role</label>
-          <select
-            name="role"
-            value={role}
-            onChange={(e) => setRole(e.target.value)}
-            className="form-control"
-          >
-            <option value="student">Student</option>
-            <option value="administrator">Administrator</option>
-          </select>
-        </div>
-        <div className="form-group">
-          <label htmlFor="email">Email address</label>
-          <input
-            type="email"
-            name="email"
-            required
-            className="form-control"
-            id="email"
-            placeholder="Enter email"
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            name="password"
-            required
-            className="form-control"
-            id="password"
-            placeholder="Password"
-          />
-        </div>
-        {error && <div className="alert alert-danger">{error}</div>} {/* Display error message */}
-        <button type="submit" className="btn btn-primary" disabled={loading}>
-          {loading ? 'Logging in...' : 'Submit'} {/* Show loading text */}
-        </button>
+      <h2 id="loginHeading">Welcome Back 👋</h2>
+      <p className="login-subtext">Please log in to continue to your dashboard</p>
+
+      <form onSubmit={sendData} className="login-form">
+        <fieldset disabled={loading}>
+          <div className="form-group">
+            <label htmlFor="role">Select Role</label>
+            <select
+              name="role"
+              id="role"
+              value={role}
+              onChange={(e) => setRole(e.target.value)}
+              className="form-control"
+              required
+            >
+              <option value="student">Student</option>
+              <option value="administrator">Administrator</option>
+            </select>
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="email">Email Address</label>
+            <input
+              type="email"
+              name="email"
+              id="email"
+              required
+              placeholder="e.g. john@example.com"
+              className="form-control"
+              autoComplete="username"
+            />
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="password">Password</label>
+            <input
+              type="password"
+              name="password"
+              id="password"
+              required
+              placeholder="Your password"
+              className="form-control"
+              autoComplete="current-password"
+            />
+          </div>
+
+          {error && (
+            <div className="alert alert-danger" aria-live="polite">
+              {error}
+            </div>
+          )}
+
+          <button type="submit" className="btn btn-primary" disabled={loading}>
+            {loading ? 'Logging in...' : 'Login'}
+          </button>
+        </fieldset>
       </form>
     </div>
   );

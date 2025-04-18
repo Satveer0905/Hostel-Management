@@ -1,22 +1,22 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import './AdminDashboard.css';
+import styles from './AdminDashboard.module.css';
 
 function AdminDashboard() {
   const navigate = useNavigate();
 
   const handleLogout = () => {
     alert("You have been logged out.");
-    navigate("/"); // Redirect to login
+    navigate("/");
   };
 
   return (
-    <div className="admin-dashboard">
-      <header className="dashboard-header">
+    <div className={styles['admin-dashboard']}>
+      <header className={styles['dashboard-header']}>
         <h1>Hostel Management System</h1>
-        <button className="logout-button" onClick={handleLogout}>Logout</button>
+        <button className={styles['logout-button']} onClick={handleLogout}>Logout</button>
 
-        <nav className="dashboard-nav">
+        <nav className={styles['dashboard-nav']}>
           <ul>
             <li onClick={() => navigate('/')}>Logo</li>
             <li>Dashboard</li>
@@ -24,28 +24,27 @@ function AdminDashboard() {
             <li onClick={() => navigate('/rooms')}>Room</li>
             <li>Maintenance</li>
             <li>Reports</li>
-            {/* <li>Settings</li> */}
           </ul>
         </nav>
       </header>
 
-      <main className="dashboard-content">
-        <section className="card">
+      <main className={styles['dashboard-content']}>
+        <section className={styles.card}>
           <h2>Total Students</h2>
           <p>150</p>
         </section>
 
-        <section className="card">
+        <section className={styles.card}>
           <h2>Available Rooms</h2>
           <p>20</p>
         </section>
 
-        <section className="card">
+        <section className={styles.card}>
           <h2>Maintenance Requests</h2>
           <p>5 Pending</p>
         </section>
 
-        <section className="card">
+        <section className={styles.card}>
           <h2>Recent Activities</h2>
           <ul>
             <li>Room 101 assigned to John Doe</li>
