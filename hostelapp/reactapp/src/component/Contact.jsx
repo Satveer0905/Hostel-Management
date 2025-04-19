@@ -36,7 +36,7 @@ function Contact() {
       <div className="map-section">
         <iframe
           title="SmartHostel Location"
-          src=""
+          src="https://www.google.com/maps/place/ABES+Engineering+College/@28.6340537,77.4455928,17z/data=!3m1!4b1!4m6!3m5!1s0x390cee22c60837b7:0x7c35343eceb7bde0!8m2!3d28.6340537!4d77.4455928!16s%2Fm%2F0jk_wyv?entry=ttu&g_ep=EgoyMDI1MDQxNi4xIKXMDSoASAFQAw%3D%3D"
           frameBorder="0"
           allowFullScreen
         ></iframe>

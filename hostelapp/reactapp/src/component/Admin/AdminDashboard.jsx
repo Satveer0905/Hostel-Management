@@ -40,7 +40,7 @@ function AdminDashboard() {
           <p>20</p>
         </section>
 
-       
+      
 
         <section className={styles.card}>
           <h2>Recent Activities</h2>
