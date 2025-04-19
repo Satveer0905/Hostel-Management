@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './AdminDashboard.module.css';
+import Maintenance from './Maintenance';
 
 function AdminDashboard() {
   const navigate = useNavigate();
@@ -40,8 +41,7 @@ function AdminDashboard() {
         </section>
 
         <section className={styles.card}>
-          <h2>Maintenance Requests</h2>
-          <p>5 Pending</p>
+          <Maintenance /> {/* Include the Maintenance component here */}
         </section>
 
         <section className={styles.card}>

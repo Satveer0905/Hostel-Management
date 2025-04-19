@@ -10,5 +10,11 @@
     "email": "abcd@gmail.com",
     "password": "1234",
     "userType": "student"
+  },
+  {
+    "name": "Student 1",
+    "email": "stu1@gmail.com",
+    "password": "123",
+    "userType": "administrator"
   }
 ]
