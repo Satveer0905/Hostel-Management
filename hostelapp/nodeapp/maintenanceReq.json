@@ -1,0 +1,15 @@
+[
+    {
+      "studentName": "Satveer",
+      "admissionNo": "12345",
+      "roomId": "A-101",
+      "issue": "Fan not working"
+    },
+    {
+      "studentName": "Amit",
+      "admissionNo": "12346",
+      "roomId": "B-202",
+      "issue": "Water leakage"
+    }
+  ]
+  

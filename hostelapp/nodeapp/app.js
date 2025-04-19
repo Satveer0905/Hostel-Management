@@ -128,6 +128,21 @@ const server = http.createServer((req, res) => {
             }
         });
     }
+    // Handle GET request to fetch maintenance data
+if (req.url === "/maintenance" && req.method === "GET") {
+    fs.readFile('maintenanceReq.json', 'utf-8')
+        .then(data => {
+            res.setHeader('Content-Type', 'application/json');
+            res.end(data);
+        })
+        .catch(err => {
+            res.setHeader('Content-Type', 'application/json');
+            res.statusCode = 500;
+            res.end(JSON.stringify({ msg: "Error reading maintenance data", error: err.message }));
+        });
+}
+
+
 });
 
 

@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Link, animateScroll as scroll } from 'react-scroll'; // Import react-scroll
 import './StudentDashboard.css'; // Import the CSS file
 
 function StudentDashboard() {
@@ -31,7 +32,17 @@ function StudentDashboard() {
           <ul>
             <li>Food Services</li>
             <li>Cleaning Services</li>
-            <li>Maintenance Requests</li>
+            {/* Add scroll behavior for Maintenance Requests */}
+            <li>
+              <Link
+                to="maintenance-section" // This matches the ID of the section you want to scroll to
+                smooth={true}
+                duration={500}
+                offset={-100} // Adjust the offset if needed for better alignment
+              >
+                Maintenance Requests
+              </Link>
+            </li>
           </ul>
         </div>
         <div className="student-dashboard__info-card">
@@ -39,7 +50,7 @@ function StudentDashboard() {
           <p>No visitors allowed after 10 PM.</p>
           <p>Monthly fees are due by the 5th of each month.</p>
         </div>
-        <div className="student-dashboard__maintenance">
+        <div id="maintenance-section" className="student-dashboard__maintenance">
           <h3>Maintenance Request</h3>
           <p>Click below to submit a request</p>
           <button id="Maintainance-button" onClick={() => navigate('/maintenance')}>Maintenance</button>
