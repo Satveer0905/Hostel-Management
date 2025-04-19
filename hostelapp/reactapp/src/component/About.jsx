@@ -1,29 +1,47 @@
-import React from "react";
-import "./About.css";
+import React from 'react';
+import './About.css';
 
-function About() {
+const About = () => {
   return (
-    <div className="about-page">
-      <div className="about-header">
-        <h1>About Us</h1>
-        <p>Learn more about who we are</p>
-      </div>
-      <div className="about-content">
-        <p>
-          We are a group of passionate <strong>Computer Science Engineering</strong> students from <strong>ABES Engineering College, Ghaziabad</strong>, currently in our <strong>third year</strong>.
-        </p>
-        <p>
-          This Hostel Management System is a reflection of our dedication towards building efficient and real-world web applications using modern technologies like <strong>React</strong> and <strong>Node.js</strong>.
-        </p>
-        <p>
-          We aim to simplify the management of hostel operations while delivering a user-friendly and responsive experience.
-        </p>
-        <p>
-          Thank you for visiting!
-        </p>
-      </div>
+    <div className="about-container">
+      <section className="about-hero">
+        <h1>About <span className="highlight">SmartHostel</span></h1>
+        <p>Your digital companion for seamless hostel management.</p>
+      </section>
+
+      <section className="about-content">
+        <div className="mission">
+          <h2>Our Mission</h2>
+          <p>
+            At SmartHostel, our goal is to simplify hostel life by integrating smart
+            technology. From managing schedules and tracking lectures to sending reminders
+            and visualizing progress — we empower students to stay organized, focused, and stress-free.
+          </p>
+        </div>
+
+        <div className="team">
+          <h2>Meet Our Team</h2>
+          <div className="team-cards">
+            <div className="card">
+              <div className="avatar">👩‍💻</div>
+              <h3>Priya Sharma</h3>
+              <p>Frontend Developer</p>
+            </div>
+            <div className="card">
+              <div className="avatar">🧠</div>
+              <h3>Rahul Mehta</h3>
+              <p>AI/Backend Developer</p>
+            </div>
+            <div className="card">
+              <div className="avatar">🎨</div>
+              <h3>Simran Kaur</h3>
+              <p>UI/UX Designer</p>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   );
-}
+};
 
 export default About;
