@@ -7,7 +7,6 @@ import Contact from './component/Contact';
 import About from './component/About';
 import Maintainance from './component/Maintainance';
 import AdminDashboard from './component/Admin/AdminDashboard';
-import AdminLayout from './component/Admin/AdminLayout';
 import StudentDashboard from './component/Student/StudentDashboard';
 import Room from './component/Room/Room';
 
@@ -15,23 +14,16 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        {/* Public Routes */}
         <Route path="/" element={<Home />} />
         <Route path="/register" element={<Registration />} />
         <Route path="/login" element={<Login />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/about" element={<About />} />
         <Route path="/maintenance" element={<Maintainance />} />
+        <Route path="/AdminDashboard" element={<AdminDashboard />} />
         <Route path="/StudentDashboard" element={<StudentDashboard />} />
+        <Route path="/rooms" element={<Room />} />
 
-        {/* Admin Routes with Layout */}
-        <Route path="/admin" element={<AdminLayout />}>
-          <Route index element={<AdminDashboard />} />
-          <Route path="rooms" element={<Room />} />
-        </Route>
-
-        {/* Fallback Route */}
-        <Route path="*" element={<div>404 - Page Not Found</div>} />
       </Routes>
     </BrowserRouter>
   );

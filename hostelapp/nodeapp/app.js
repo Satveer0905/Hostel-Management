@@ -15,6 +15,38 @@ const server = http.createServer((req, res) => {
         return res.end(); // End the response
     }
 
+    // Handle room allocation data
+    if (req.url === "/rooms" && req.method === "POST") {
+        let body = '';
+
+        req.on('data', chunk => { body += chunk; });
+
+        req.on('end', async () => {
+            try {
+                const newRoom = JSON.parse(body);
+                let roomData = [];
+
+                // Try reading existing room data
+                try {
+                    const fileData = await fs.readFile('Roomdata.json', 'utf-8');
+                    roomData = JSON.parse(fileData);
+                } catch {
+                    roomData = [];
+                }
+
+                // Add the new room entry
+                roomData.push(newRoom);
+                await fs.writeFile('Roomdata.json', JSON.stringify(roomData, null, 2));
+
+                res.setHeader('Content-Type', 'application/json');
+                res.end(JSON.stringify({ msg: "Room data saved successfully" }));
+            } catch (err) {
+                res.setHeader('Content-Type', 'application/json');
+                res.end(JSON.stringify({ msg: "Error: " + err.message }));
+            }
+        });
+    }
+
     // Handle registration requests
     if (req.url === "/register" && req.method === "POST") {
         let body = ''; // Initialize an empty string to collect the request body
@@ -97,6 +129,8 @@ const server = http.createServer((req, res) => {
         });
     }
 });
+
+
 
 // Start the server and listen on the specified port
 server.listen(PORT, () => {

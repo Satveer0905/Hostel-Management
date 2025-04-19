@@ -27,7 +27,7 @@ function Room() {
     setStudentInfo(prev => ({ ...prev, [field]: value }));
   };
 
-  const allocateRoom = () => {
+  const allocateRoom = async () => {
     const { name, admissionNo, year, branch, roomType, roomNo, roomId } = studentInfo;
 
     if (!name || !admissionNo || !year || !branch || !roomType || !roomNo || !roomId) {
@@ -36,7 +36,29 @@ function Room() {
     }
 
     const room = { ...studentInfo };
-    setRooms(prev => [...prev, room]);
+
+    // Send the room data to the server
+    try {
+      const response = await fetch('http://localhost:3005/rooms', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(room),
+      });
+
+      const result = await response.json();
+      if (result.msg === "Room data saved successfully") {
+        setRooms(prev => [...prev, room]);  // Add the allocated room to the local state
+        setMessage(`✅ Room ${roomNo} allocated successfully.`);
+      } else {
+        setMessage('❌ Error allocating room');
+      }
+
+      setTimeout(() => setMessage(''), 3000);
+    } catch (error) {
+      setMessage('❌ Error sending data to the server');
+    }
+
+    // Reset the form
     setStudentInfo({
       name: '',
       admissionNo: '',
@@ -46,8 +68,6 @@ function Room() {
       roomNo: '',
       roomId: ''
     });
-    setMessage(`✅ Room ${roomNo} allocated successfully.`);
-    setTimeout(() => setMessage(''), 3000);
   };
 
   const totalRooms = rooms.length;
