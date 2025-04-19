@@ -34,12 +34,16 @@ function Contact() {
 
       {/* Map or Image Section */}
       <div className="map-section">
-        <iframe
-          title="SmartHostel Location"
-          src="https://www.google.com/maps/place/ABES+Engineering+College/@28.6340537,77.4455928,17z/data=!3m1!4b1!4m6!3m5!1s0x390cee22c60837b7:0x7c35343eceb7bde0!8m2!3d28.6340537!4d77.4455928!16s%2Fm%2F0jk_wyv?entry=ttu&g_ep=EgoyMDI1MDQxNi4xIKXMDSoASAFQAw%3D%3D"
-          frameBorder="0"
-          allowFullScreen
-        ></iframe>
+      <iframe
+  title="SmartHostel Location"
+  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1124.1531263075795!2d77.44473091944387!3d28.633994393394515!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cee22c60837b7%3A0x7c35343eceb7bde0!2sABES%20Engineering%20College!5e0!3m2!1sen!2sin!4v1689658995340!5m2!1sen!2sin"
+  width="100%"
+  height="450"
+  style={{ border: 0 }}
+  allowFullScreen=""
+  loading="lazy"
+  referrerPolicy="no-referrer-when-downgrade"
+/>
       </div>
     </div>
   );
