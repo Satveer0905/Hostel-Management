@@ -39,6 +39,11 @@ function StudentDashboard() {
           <p>No visitors allowed after 10 PM.</p>
           <p>Monthly fees are due by the 5th of each month.</p>
         </div>
+        <div className="student-dashboard__maintenance">
+          <h3>Maintenance Request</h3>
+          <p>Click below to submit a request</p>
+          <button id="Maintainance-button" onClick={() => navigate('/maintenance')}>Maintenance</button>
+        </div>
       </div>
     </div>
   );

@@ -118,3 +118,52 @@
     font-size: 1.5rem;
   }
 }
+/* Maintanance card */
+.student-dashboard__maintenance {
+  background: #ffffffee;
+  padding: 25px 30px;
+  border-radius: 20px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease;
+}
+.student-dashboard__maintenance :hover {
+  transform: translateY(-5px);
+}
+
+.student-dashboard__maintenance  h3 {
+  margin-top: 0;
+  color: #6200ea;
+  font-size: 1.4rem;
+  margin-bottom: 10px;
+}
+
+.student-dashboard__maintenance  p{
+  font-size: 1rem;
+  color: #444;
+  line-height: 1.6;
+  
+  
+}
+.student-dashboard__maintenance  li {
+  margin-bottom: 10px;
+  list-style: none;
+
+}
+#Maintainance-button {
+  background: linear-gradient(45deg, #ff6a6a, #ffb86c);
+  color: #fff;
+  border: none;
+  border-radius: 30px;
+  padding: 10px 24px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+#Maintainance-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15);
+}
+
+
