@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './AdminDashboard.module.css';
-import Maintenance from './Maintenance';
+// import Maintenance from './Maintenance';
 
 function AdminDashboard() {
   const navigate = useNavigate();
@@ -38,10 +38,6 @@ function AdminDashboard() {
         <section className={styles.card}>
           <h2>Available Rooms</h2>
           <p>20</p>
-        </section>
-
-        <section className={styles.card}>
-          <Maintenance /> {/* Include the Maintenance component here */}
         </section>
 
         <section className={styles.card}>
