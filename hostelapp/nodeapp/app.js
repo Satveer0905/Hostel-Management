@@ -111,7 +111,7 @@ const server = http.createServer((req, res) => {
 
                 // Check if the user exists and the password matches, along with the userType
                 const user = users.find(u => u.email === email && u.password === password && u.userType === role);
-
+                console.log(user)
                 // Set the response content type to JSON
                 res.setHeader('Content-Type', 'application/json');
                 if (user) {

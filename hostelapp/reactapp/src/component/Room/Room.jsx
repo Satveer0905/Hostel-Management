@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styles from './Room.module.css';
-
+import AdminLayout from '../Admin/AdminLayout';
 function Room() {
   const [rooms, setRooms] = useState([]);
   const [message, setMessage] = useState('');
@@ -73,6 +73,8 @@ function Room() {
   const totalRooms = rooms.length;
 
   return (
+    <>
+    <AdminLayout/>  
     <div className={styles['room-container']}>
       <h2>Room Allocation (Admin)</h2>
 
@@ -160,6 +162,7 @@ function Room() {
         <p><strong>Total Allocated Rooms:</strong> {totalRooms}</p>
       </div>
     </div>
+    </>
   );
 }
 
