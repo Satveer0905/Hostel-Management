@@ -1,43 +1,31 @@
-const http = require('http'); // Import the http module to create an HTTP server
-const fs = require('fs').promises; // Import the fs module to handle file operations using promises
-const PORT = 3005; // Define the port number for the server
+const http = require('http');
+const fs = require('fs').promises;
+const PORT = 3005;
 
-// Create an HTTP server
 const server = http.createServer((req, res) => {
-    // Set CORS headers to allow requests from any origin
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, DELETE, PUT, OPTIONS');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
-    // Handle preflight requests (OPTIONS)
     if (req.method === "OPTIONS") {
-        res.statusCode = 200; // Respond with 200 OK
-        return res.end(); // End the response
+        res.statusCode = 200;
+        return res.end();
     }
 
-    // Handle room allocation data
+    // Save Room Data
     if (req.url === "/rooms" && req.method === "POST") {
         let body = '';
-
-        req.on('data', chunk => { body += chunk; });
-
+        req.on('data', chunk => body += chunk);
         req.on('end', async () => {
             try {
                 const newRoom = JSON.parse(body);
                 let roomData = [];
-
-                // Try reading existing room data
                 try {
                     const fileData = await fs.readFile('Roomdata.json', 'utf-8');
                     roomData = JSON.parse(fileData);
-                } catch {
-                    roomData = [];
-                }
-
-                // Add the new room entry
+                } catch { roomData = []; }
                 roomData.push(newRoom);
                 await fs.writeFile('Roomdata.json', JSON.stringify(roomData, null, 2));
-
                 res.setHeader('Content-Type', 'application/json');
                 res.end(JSON.stringify({ msg: "Room data saved successfully" }));
             } catch (err) {
@@ -47,107 +35,126 @@ const server = http.createServer((req, res) => {
         });
     }
 
-    // Handle registration requests
+    // Register
     if (req.url === "/register" && req.method === "POST") {
-        let body = ''; // Initialize an empty string to collect the request body
-
-        // Collect data chunks from the request
-        req.on('data', chunk => { body += chunk; });
-
-        // Process the complete request once all data has been received
+        let body = '';
+        req.on('data', chunk => body += chunk);
         req.on('end', async () => {
             try {
-                // Parse the JSON body to extract name, email, password, and userType
                 const { name, email, password, userType } = JSON.parse(body);
-                let data = []; // Initialize an empty array to hold user data
-
-                // Attempt to read existing user data from student.json
+                let data = [];
                 try {
                     const fileData = await fs.readFile('student.json', 'utf-8');
-                    data = JSON.parse(fileData); // Parse the JSON data into an array
-                } catch {
-                    data = []; // If the file doesn't exist or is empty, initialize data as an empty array
-                }
-
-                // Check if the email is already registered
+                    data = JSON.parse(fileData);
+                } catch { data = []; }
                 const exists = data.find(u => u.email === email);
                 if (exists) {
-                    // If the email is already registered, send an error response
                     res.setHeader('Content-Type', 'application/json');
                     return res.end(JSON.stringify({ msg: "Email is already registered" }));
                 }
-
-                // If the email is not registered, add the new user to the array
-                data.push({ name, email, password, userType }); // Save userType along with other user details
-                await fs.writeFile('student.json', JSON.stringify(data, null, 2)); // Write the updated user data back to student.json
-
-                // Send a success response
+                data.push({ name, email, password, userType });
+                await fs.writeFile('student.json', JSON.stringify(data, null, 2));
                 res.setHeader('Content-Type', 'application/json');
-                res.end(JSON.stringify({ msg: "User  successfully registered" }));
+                res.end(JSON.stringify({ msg: "User successfully registered" }));
             } catch (err) {
-                // Handle any errors that occur during the registration process
                 res.setHeader('Content-Type', 'application/json');
-                res.end(JSON.stringify({ msg: "Error: " + err.message })); // Send error response
+                res.end(JSON.stringify({ msg: "Error: " + err.message }));
             }
         });
     }
 
-    // Handle login requests
+    // Login
     if (req.url === "/login" && req.method === "POST") {
-        let body = ''; // Initialize an empty string to collect the request body
-
-        // Collect data chunks from the request
-        req.on('data', chunk => { body += chunk; });
-
-        // Process the complete request once all data has been received
+        let body = '';
+        req.on('data', chunk => body += chunk);
         req.on('end', async () => {
             try {
-                // Parse the JSON body to extract email, password, and role
                 const { email, password, role } = JSON.parse(body);
-
-                // Read the existing user data from student.json
                 const fileData = await fs.readFile('student.json', 'utf-8');
-                const users = JSON.parse(fileData); // Parse the JSON data into an array
-
-                // Check if the user exists and the password matches, along with the userType
+                const users = JSON.parse(fileData);
                 const user = users.find(u => u.email === email && u.password === password && u.userType === role);
-                console.log(user)
-                // Set the response content type to JSON
                 res.setHeader('Content-Type', 'application/json');
-                if (user) {
-                    // If the user is found, send a success response
-                    res.end(JSON.stringify({ msg: "success" }));
-                } else {
-                    // If the user is not found, send an invalid user response
-                    res.end(JSON.stringify({ msg: "User  is invalid" }));
-                }
+                res.end(JSON.stringify({ msg: user ? "success" : "User is invalid" }));
             } catch (err) {
-                // Handle any errors that occur during the login process
                 res.setHeader('Content-Type', 'application/json');
-                res.end(JSON.stringify({ msg: "Error: " + err.message })); // Send error response
+                res.end(JSON.stringify({ msg: "Error: " + err.message }));
             }
         });
     }
-    // Handle GET request to fetch maintenance data
-if (req.url === "/maintenance" && req.method === "GET") {
-    fs.readFile('maintenanceReq.json', 'utf-8')
-        .then(data => {
-            res.setHeader('Content-Type', 'application/json');
-            res.end(data);
-        })
-        .catch(err => {
-            res.setHeader('Content-Type', 'application/json');
-            res.statusCode = 500;
-            res.end(JSON.stringify({ msg: "Error reading maintenance data", error: err.message }));
-        });
-}
 
+    // Submit Maintenance Request (POST)
+    if (req.url === "/maintenance" && req.method === "POST") {
+        let body = '';
+        req.on('data', chunk => body += chunk);
+        req.on('end', async () => {
+            try {
+                const newRequest = JSON.parse(body);
+                let maintenanceData = [];
+                try {
+                    const fileData = await fs.readFile('maintenanceReq.json', 'utf-8');
+                    maintenanceData = JSON.parse(fileData);
+                } catch { maintenanceData = []; }
+
+                // Add unique id to each request
+                newRequest.id = Date.now();
+                newRequest.status = "Unresolved";
+
+                maintenanceData.push(newRequest);
+                await fs.writeFile('maintenanceReq.json', JSON.stringify(maintenanceData, null, 2));
+                res.setHeader('Content-Type', 'application/json');
+                res.end(JSON.stringify({ msg: "Maintenance request saved successfully" }));
+            } catch (err) {
+                res.setHeader('Content-Type', 'application/json');
+                res.end(JSON.stringify({ msg: "Error: " + err.message }));
+            }
+        });
+    }
+
+    // Fetch All Maintenance Requests (GET)
+    if (req.url === "/maintenance" && req.method === "GET") {
+        fs.readFile('maintenanceReq.json', 'utf-8')
+            .then(data => {
+                res.setHeader('Content-Type', 'application/json');
+                res.end(data);
+            })
+            .catch(err => {
+                res.setHeader('Content-Type', 'application/json');
+                res.statusCode = 500;
+                res.end(JSON.stringify({ msg: "Error reading maintenance data", error: err.message }));
+            });
+    }
+
+    // Update Maintenance Request Status (PUT)
+    if (req.url === "/maintenance" && req.method === "PUT") {
+        let body = '';
+        req.on('data', chunk => body += chunk);
+        req.on('end', async () => {
+            try {
+                const { requestId, status } = JSON.parse(body);
+                const fileData = await fs.readFile('maintenanceReq.json', 'utf-8');
+                let maintenanceData = JSON.parse(fileData);
+
+                const index = maintenanceData.findIndex(r => r.id === requestId);
+                if (index !== -1) {
+                    maintenanceData[index].status = status;
+                    await fs.writeFile('maintenanceReq.json', JSON.stringify(maintenanceData, null, 2));
+                    res.setHeader('Content-Type', 'application/json');
+                    res.end(JSON.stringify({ msg: "Status updated successfully" }));
+                } else {
+                    res.statusCode = 404;
+                    res.setHeader('Content-Type', 'application/json');
+                    res.end(JSON.stringify({ msg: "Request not found" }));
+                }
+            } catch (err) {
+                res.statusCode = 500;
+                res.setHeader('Content-Type', 'application/json');
+                res.end(JSON.stringify({ msg: "Error: " + err.message }));
+            }
+        });
+    }
 
 });
 
-
-
-// Start the server and listen on the specified port
 server.listen(PORT, () => {
-    console.log("Server is running on port " + PORT); // Log the server status
+    console.log("Server is running on port " + PORT);
 });

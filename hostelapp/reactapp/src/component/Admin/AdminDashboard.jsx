@@ -66,21 +66,18 @@ function AdminDashboard() {
           <p>20</p>
         </section>
 
-        <section className={styles.card}>
-          <h2>Recent Maintenance Requests</h2>
-          <ul>
-            {maintenanceRequests.map((request) => (
-              <li key={request.id}>
-                <p><strong>Student:</strong> {request.requester}</p>
-                <p><strong>Issue:</strong> {request.issue}</p>
-                <p><strong>Status:</strong> {request.status}</p>
-                {request.status !== 'Resolved' && (
-                  <button onClick={() => handleMarkResolved(request.id)}>Mark as Resolved</button>
-                )}
-              </li>
-            ))}
-          </ul>
-        </section>
+        <section className={styles.card} onClick={() => navigate('/maintenanceReq')} style={{ cursor: 'pointer' }}>
+  <h2>Pending Maintenance Requests</h2>
+  <p>
+    {
+      maintenanceRequests.filter(
+        (request) => request.status !== 'Resolved'
+      ).length
+    }{' '}
+    request(s) pending
+  </p>
+</section>
+
       </main>
     </div>
   );

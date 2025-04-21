@@ -13,16 +13,40 @@ function Maintenance() {
     setMaintenanceData({ ...maintenanceData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = () => {
-    console.log('Maintenance Request Submitted:', maintenanceData);
-    alert('Maintenance request submitted successfully!');
-    // Optionally reset form
-    setMaintenanceData({
-      studentName: '',
-      admissionNo: '',
-      roomId: '',
-      issue: '',
-    });
+  const handleSubmit = async () => {
+    const { studentName, admissionNo, roomId, issue } = maintenanceData;
+
+    // Check if any field is empty
+    // if (!studentName || !admissionNo || !roomId || !issue) {
+    //   alert("Please fill out all fields before submitting.");
+    //   return;
+    // }
+
+    try {
+      const response = await fetch("http://localhost:3005/maintenance", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(maintenanceData)
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        alert('Maintenance request submitted successfully!');
+        setMaintenanceData({
+          studentName: '',
+          admissionNo: '',
+          roomId: '',
+          issue: '',
+        });
+      } else {
+        alert("Failed to submit maintenance request: " + result.msg);
+      }
+    } catch (error) {
+      alert("Error submitting request: " + error.message);
+    }
   };
 
   return (
@@ -40,6 +64,7 @@ function Maintenance() {
           value={maintenanceData.studentName}
           onChange={handleChange}
           placeholder="Enter your full name"
+          required
         />
 
         <label htmlFor="admissionNo">Admission Number</label>
@@ -50,6 +75,7 @@ function Maintenance() {
           value={maintenanceData.admissionNo}
           onChange={handleChange}
           placeholder="Enter your admission number"
+          required
         />
 
         <label htmlFor="roomId">Room Number</label>
@@ -60,6 +86,7 @@ function Maintenance() {
           value={maintenanceData.roomId}
           onChange={handleChange}
           placeholder="Enter your room number"
+          required
         />
 
         <label htmlFor="issue">Issue Description</label>
@@ -69,9 +96,10 @@ function Maintenance() {
           value={maintenanceData.issue}
           onChange={handleChange}
           placeholder="Describe the issue..."
+          required
         />
 
-        <button className="btn maintenance-btn" onClick={handleSubmit}>
+        <button className="btn maintenance-btn" onClick={handleSubmit} type='submit'>
           Submit Request
         </button>
       </div>
