@@ -1,8 +1,9 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Outlet, useNavigate } from 'react-router-dom';
-import styles from './AdminDashboard.module.css'; // reuse the CSS
-
-function AdminLayout() {
+// import Room from './Room/Room'; // Adjust the import path as necessary
+import './adminLayout.css'; // reuse the CSS
+export default function AdminLayout() {
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -11,28 +12,31 @@ function AdminLayout() {
   };
 
   return (
-    <div className={styles['admin-dashboard']}>
-      <header className={styles['dashboard-header']}>
-        <h1>Hostel Management System</h1>
-        <button className={styles['logout-button']} onClick={handleLogout}>Logout</button>
+    <div className={'admin-dashboard'}>
+      <div className="upper">
+      <header className={'dashboard-header'}>
+        <h1>Smart Hostel</h1>
+        
       </header>
 
-      <nav className={styles['dashboard-nav']}>
+      <nav className={'dashboard-nav'}>
         <ul>
           <li onClick={() => navigate('/')}>Logo</li>
           <li onClick={() => navigate('/admin')}>Dashboard</li>
           <li>Students</li>
-          <li onClick={() => navigate('/admin/rooms')}>Room</li>
-          <li>Maintenance</li>
+          <li><Link to="/rooms" style={{textDecoration:'none', color:'#333'}}>Room</Link></li>
+          <li><Link to="/maintenanceReq" style={{textDecoration:'none', color:'#333'}}>Maintenance</Link></li>
           <li>Reports</li>
         </ul>
+       <div className='bt'><button className={'logout-button'} onClick={handleLogout}>Logout</button></div> 
       </nav>
+      </div>
 
-      <main className={styles['dashboard-content']}>
+      <main className={'dashboard-content'}>
         <Outlet />
       </main>
     </div>
   );
 }
 
-export default AdminLayout;
+

@@ -1,4 +1,16 @@
 
+#maintaince-requests-main{
+   margin-top: -100px;
+    background: linear-gradient(to right, #e0c3fc, #8ec5fc);
+  }
+  
+  .maintenance-requests-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+
 .maintenance-requests {
     padding: 30px;
     background: #f8faff;
@@ -60,7 +72,7 @@
     text-align: center;
     font-size: 1.1rem;
     color: #555;
-    margin-top: 20px;
+    margin-top: 300px;
   }
   
   /* Responsive Table */

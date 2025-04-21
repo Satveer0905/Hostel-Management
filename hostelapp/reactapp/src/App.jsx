@@ -26,6 +26,7 @@ function App() {
         <Route path="/AdminDashboard" element={<AdminDashboard />} />
         <Route path="/StudentDashboard" element={<StudentDashboard />} />
         <Route path="/rooms" element={<Room />} />
+        {/* <Route path="/maintenanceReq/Room/Room" element={<Room />} /> */}
 
       </Routes>
     </BrowserRouter>

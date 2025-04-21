@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './Maintenance.css';
-
+import AdminLayout from './AdminLayout'
 function MaintenanceRequests() {
   const [requests, setRequests] = useState([]);
 
@@ -40,7 +40,9 @@ function MaintenanceRequests() {
   };
 
   return (
-    <div className="maintenance-requests">
+    <>
+    <AdminLayout/>
+    <div className="maintenance-requests" id="maintaince-requests-main">
       <h2>All Maintenance Requests</h2>
       {requests.length === 0 ? (
         <p>No maintenance requests available.</p>
@@ -75,6 +77,7 @@ function MaintenanceRequests() {
         </table>
       )}
     </div>
+    </>
   );
 }
 

@@ -1,7 +1,7 @@
 .admin-dashboard {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background: linear-gradient(to right, #d7f5fd, #ffe3ec);
-  min-height: 100vh;
+  min-height: 30vh;
   padding: 20px;
   color: #2e2d2d;
 }

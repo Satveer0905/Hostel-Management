@@ -74,7 +74,7 @@ function Room() {
 
   return (
     <>
-    {/* <AdminLayout/>   */}
+    <AdminLayout/>  
     <div className={styles['room-container']}>
       <h2>Room Allocation (Admin)</h2>
 
