@@ -46,7 +46,7 @@ function AdminDashboard() {
         <nav className={styles['dashboard-nav']}>
           <ul>
             <li onClick={() => navigate('/')}>Logo</li>
-            <li>Dashboard</li>
+            <li onClick={() => navigate('/AdminDashboard')}>Dashboard</li>
             <li>Students</li>
             <li onClick={() => navigate('/rooms')}>Room</li>
             <li onClick={() => navigate('/maintenanceReq')}>Maintenance</li>
