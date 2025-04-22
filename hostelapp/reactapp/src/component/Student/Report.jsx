@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './report.css';
+import axios from 'axios';
 
 const Report = () => {
   const [reportData, setReportData] = useState({
@@ -15,24 +16,25 @@ const Report = () => {
     setReportData({ ...reportData, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Report Submitted:', reportData);
-    // You can send this data to your backend using fetch or axios
-    // Example:
-    // fetch('/report', {
-    //   method: 'POST',
-    //   headers: { 'Content-Type': 'application/json' },
-    //   body: JSON.stringify(reportData),
-    // })
-    alert('Report submitted successfully!');
-    setReportData({
-      name: '',
-      roomNo: '',
-      roomId: '',
-      admissionNo: '',
-      description: '',
-    });
+    try {
+      const response = await axios.post('http://localhost:3005/report', reportData);
+      if (response.data.msg === 'Report submitted successfully') {
+        alert('Report submitted successfully!');
+        setReportData({
+          name: '',
+          roomNo: '',
+          roomId: '',
+          admissionNo: '',
+          description: '',
+        });
+      } else {
+        alert('Failed to submit report: ' + response.data.msg);
+      }
+    } catch (error) {
+      alert('Error submitting report: ' + error.message);
+    }
   };
 
   return (

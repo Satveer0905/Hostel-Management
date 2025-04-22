@@ -12,6 +12,7 @@ import StudentDashboard from './component/Student/StudentDashboard';
 import Room from './component/Room/Room';
 import Report from './component/Student/Report';
 import MaintenanceRequests from './component/Admin/MaintenanceRequests';
+import ReportReq from './component/Admin/ReportReq';
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
         <Route path="/StudentDashboard" element={<StudentDashboard />} />
         <Route path="/rooms" element={<Room />} />
         <Route path="/report" element={<Report />} />
+        <Route path="/reportReq" element={<ReportReq />} />
         {/* <Route path="/maintenanceReq/Room/Room" element={<Room />} /> */}
 
       </Routes>

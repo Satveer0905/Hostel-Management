@@ -38,23 +38,25 @@ function AdminDashboard() {
   };
 
   return (
-    <div className={styles['admin-dashboard']}>
-      <header className={styles['dashboard-header']}>
+    <div className={'admin-dashboard'}>
+      <div className="upper">
+      <header className={'dashboard-header'}>
         <h1>Smart Hostel</h1>
-        <button className={styles['logout-button']} onClick={handleLogout}>Logout</button>
+        
+      </header>
 
-        <nav className={styles['dashboard-nav']}>
-          <ul>
+      <nav className={'dashboard-nav'}>
+        <ul>
             <li onClick={() => navigate('/')}>Logo</li>
             <li onClick={() => navigate('/AdminDashboard')}>Dashboard</li>
             <li>Students</li>
             <li onClick={() => navigate('/rooms')}>Room</li>
             <li onClick={() => navigate('/maintenanceReq')}>Maintenance</li>
-            <li>Reports</li>
-          </ul>
-        </nav>
-      </header>
-
+            <li onClick={()=>navigate('/reportReq')}>Reports</li>
+            </ul>
+       <div className='bt'><button className={'logout-button'} onClick={handleLogout}>Logout</button></div> 
+      </nav>
+      </div>
       <main className={styles['dashboard-content']}>
         <section className={styles.card}>
           <h2>Total Students</h2>

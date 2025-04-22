@@ -1,8 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Outlet, useNavigate } from 'react-router-dom';
-// import Room from './Room/Room'; // Adjust the import path as necessary
-import './adminLayout.css'; // reuse the CSS
+import './adminLayout.css';
 export default function AdminLayout() {
   const navigate = useNavigate();
 
@@ -26,7 +25,7 @@ export default function AdminLayout() {
           <li>Students</li>
           <li><Link to="/rooms" style={{textDecoration:'none', color:'#333'}}>Room</Link></li>
           <li><Link to="/maintenanceReq" style={{textDecoration:'none', color:'#333'}}>Maintenance</Link></li>
-          <li>Reports</li>
+          <li onClick={()=>navigate('/reportReq')}> Reports</li>
         </ul>
        <div className='bt'><button className={'logout-button'} onClick={handleLogout}>Logout</button></div> 
       </nav>

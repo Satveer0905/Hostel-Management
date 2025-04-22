@@ -36,9 +36,15 @@ const maintenanceSchema = new mongoose.Schema({
     status: { type: String, default: "Unresolved" }
 });
 
+
 const reportSchema = new mongoose.Schema({
     id: { type: Number, unique: true },
-    description: String
+    name: String,
+    roomNo: String,
+    roomId: String,
+    admissionNo: String,
+    description: String,
+    status: { type: String, default: "Not accepted" }
 });
 
 // MongoDB Models
@@ -138,6 +144,45 @@ app.post('/report', async (req, res) => {
         res.json({ msg: "Error: " + err.message });
     }
 });
+
+// Get All Reports
+app.get('/report', async (req, res) => {
+    try {
+        const reports = await Report.find();
+        res.json(reports);
+    } catch (err) {
+        res.status(500).json({ msg: "Error fetching reports", error: err.message });
+    }
+});
+
+// Update Report Status
+// Update Report Status
+app.put('/report/:id', async (req, res) => {
+    try {
+        const reportId = req.params.id;
+        const { status } = req.body;
+
+        // Check for valid ObjectId
+        if (!mongoose.Types.ObjectId.isValid(reportId)) {
+            return res.status(400).json({ msg: "Invalid report ID format" });
+        }
+
+        const updatedReport = await Report.findByIdAndUpdate(
+            reportId,
+            { status },
+            { new: true }
+        );
+
+        if (!updatedReport) {
+            return res.status(404).json({ msg: "Report not found" });
+        }
+
+        res.json({ msg: "Report status updated successfully", updatedReport });
+    } catch (err) {
+        res.status(500).json({ msg: "Error updating report status", error: err.message });
+    }
+});
+
 
 // Start Server
 app.listen(PORT, () => {

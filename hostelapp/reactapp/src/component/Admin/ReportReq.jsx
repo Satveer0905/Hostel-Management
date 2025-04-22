@@ -1,0 +1,108 @@
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import AdminLayout from './AdminLayout';
+import './ReportReq.css';
+
+const ReportReq = () => {
+  const [reports, setReports] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  const statusOptions = [
+    "Not accepted",
+    "Accepted",
+    "Accepted and Resolved"
+  ];
+
+  useEffect(() => {
+    fetchReports();
+  }, []);
+
+  const fetchReports = async () => {
+    try {
+      const response = await axios.get('http://localhost:3005/report');
+      setReports(response.data);
+      setLoading(false);
+    } catch (err) {
+      setError('Error fetching reports: ' + err.message);
+      setLoading(false);
+    }
+  };
+
+  const handleStatusChange = async (reportId, newStatus) => {
+    try {
+      console.log(`Updating report ${reportId} to status: ${newStatus}`);
+      const response = await axios.put(`http://localhost:3005/report/${reportId}`, {
+        status: newStatus
+      });
+  
+      if (response.data.msg === "Report status updated successfully") {
+        setReports((prevReports) =>
+          prevReports.map((report) =>
+            report._id === reportId ? { ...report, status: newStatus } : report
+          )
+        );
+      } else {
+        alert(response.data.msg || "Failed to update report status");
+      }
+    } catch (err) {
+      console.error("Status update error:", err);
+      alert('Error updating status: ' + (err.response?.data?.msg || err.message));
+    }
+  };
+  
+
+  if (loading) return <div>Loading reports...</div>;
+  if (error) return <div>{error}</div>;
+
+  return (
+    <>
+    <AdminLayout/>
+    
+    <div className="report-req-container">
+      <h2>Reported Issues</h2>
+      {reports.length === 0 ? (
+        <p>No reports found.</p>
+      ) : (
+        <table className="report-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Room No</th>
+              <th>Admission No</th>
+              <th>Description</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            {reports.map((report) => (
+              <tr key={report._id}>
+                <td>{report.id}</td>
+                <td>{report.name}</td>
+                <td>{report.roomNo}</td>
+                <td>{report.admissionNo}</td>
+                <td>{report.description}</td>
+                <td>
+                  <select
+                    value={report.status || "Not accepted"}
+                    onChange={(e) => handleStatusChange(report._id, e.target.value)}
+                  >
+                    {statusOptions.map((status) => (
+                      <option key={status} value={status}>
+                        {status}
+                      </option>
+                    ))}
+                  </select>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      )}
+    </div>
+    </>
+  );
+};
+
+export default ReportReq;
