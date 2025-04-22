@@ -211,17 +211,37 @@ app.post('/register', async (req, res) => {
 });
 
 // Login
+// app.post('/login', async (req, res) => {
+//     try {
+//         const { email, password, role } = req.body;
+//         const fileData = await fs.readFile('student.json', 'utf-8');
+//         const users = JSON.parse(fileData);
+//         const user = users.find(u => u.email === email && u.password === password && u.userType === role);
+//         res.json({ msg: user ? "success" : "User is invalid" });
+//     } catch (err) {
+//         res.json({ msg: "Error: " + err.message });
+//     }
+// });
+// Login
 app.post('/login', async (req, res) => {
     try {
         const { email, password, role } = req.body;
         const fileData = await fs.readFile('student.json', 'utf-8');
         const users = JSON.parse(fileData);
         const user = users.find(u => u.email === email && u.password === password && u.userType === role);
-        res.json({ msg: user ? "success" : "User is invalid" });
+        
+        if (user) {
+            const name = user.name;
+            // console.log(name)
+            res.json({ msg: "success", user }); // send user info
+        } else {
+            res.json({ msg: "User is invalid" });
+        }
     } catch (err) {
         res.json({ msg: "Error: " + err.message });
     }
 });
+
 
 // Submit Maintenance Request
 app.post('/maintenance', async (req, res) => {
@@ -275,6 +295,29 @@ app.put('/maintenance', async (req, res) => {
         res.status(500).json({ msg: "Error: " + err.message });
     }
 });
+
+//submit Reports
+app.post(
+    '/report', async (req, res) => {
+        try {
+            const newReport = req.body;
+            let reportData = [];
+            try {
+                const fileData = await fs.readFile('report.json', 'utf-8');
+                reportData = JSON.parse(fileData);
+            } catch {
+                reportData = [];
+            }
+
+            newReport.id = Date.now();
+            reportData.push(newReport);
+            await fs.writeFile('report.json', JSON.stringify(reportData, null, 2));
+            res.json({ msg: "Report submitted successfully" });
+        } catch (err) {
+            res.json({ msg: "Error: " + err.message });
+        }
+    }
+)
 
 // Start Server
 app.listen(PORT, () => {

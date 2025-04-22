@@ -40,7 +40,7 @@ function AdminDashboard() {
   return (
     <div className={styles['admin-dashboard']}>
       <header className={styles['dashboard-header']}>
-        <h1>Hostel Management System</h1>
+        <h1>Smart Hostel</h1>
         <button className={styles['logout-button']} onClick={handleLogout}>Logout</button>
 
         <nav className={styles['dashboard-nav']}>

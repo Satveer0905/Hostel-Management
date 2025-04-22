@@ -27,6 +27,8 @@ function Login() {
       setLoading(false);
 
       if (res.msg === "success") {
+        localStorage.setItem('studentName', res.user.name);
+        localStorage.setItem('studentEmail', res.user.email);
         navigate(role === 'administrator' ? "/AdminDashboard" : "/StudentDashboard");
       } else {
         setError(res.msg || 'Login failed. Please try again.');

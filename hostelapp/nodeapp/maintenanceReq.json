@@ -5,7 +5,7 @@
     "roomId": "T-35",
     "issue": "Fan is not Working ",
     "id": 1745216090745,
-    "status": "Resolved"
+    "status": "Unresolved"
   },
   {
     "studentName": "Satveer Singh ",
@@ -13,36 +13,6 @@
     "roomId": "F=11",
     "issue": "Issue in Room",
     "id": 1745216142302,
-    "status": "Resolved"
-  }, {
-    "studentName": "Arpit Gupta",
-    "admissionNo": "2022b0101015",
-    "roomId": "T-35",
-    "issue": "Fan is not Working ",
-    "id": 1745216090745,
-    "status": "Resolved"
-  },
-  {
-    "studentName": "Satveer Singh ",
-    "admissionNo": "2023b010301112",
-    "roomId": "F=11",
-    "issue": "Issue in Room",
-    "id": 1745216142302,
-    "status": "Resolved"
-  }, {
-    "studentName": "Arpit Gupta",
-    "admissionNo": "2022b0101015",
-    "roomId": "T-35",
-    "issue": "Fan is not Working ",
-    "id": 1745216090745,
-    "status": "Resolved"
-  },
-  {
-    "studentName": "Satveer Singh ",
-    "admissionNo": "2023b010301112",
-    "roomId": "F=11",
-    "issue": "Issue in Room",
-    "id": 1745216142302,
-    "status": "Resolved"
+    "status": "Unresolved"
   }
 ]
