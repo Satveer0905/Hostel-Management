@@ -14,6 +14,7 @@ import Report from './component/Student/Report';
 import MaintenanceRequests from './component/Admin/MaintenanceRequests';
 import ReportReq from './component/Admin/ReportReq';
 import StudentDetailsForm from './component/Student/StudentDetailsForm';
+import AdminStudents from './component/Admin/AdminStudents';
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
         <Route path="/maintenance" element={<Maintainance />} />
         <Route path="/maintenanceReq" element={<MaintenanceRequests />} />
         <Route path="/AdminDashboard" element={<AdminDashboard />} />
+        <Route path="/AdminStudents" element={<AdminStudents />} />
         <Route path="/StudentDashboard" element={<StudentDashboard />} />
         <Route path="/StudentDetailsForm" element={<StudentDetailsForm />} />
         <Route path="/rooms" element={<Room />} />
