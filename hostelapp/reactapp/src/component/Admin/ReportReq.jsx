@@ -113,9 +113,24 @@ const ReportReq = () => {
                   </select>
                 </td>
                 <td>
-                  <button onClick={() => handleDelete(report._id)} style={{backgroundColor: 'red', color: 'white'}}>
-                    Delete
-                  </button>
+                <button onClick={() => handleDelete(report._id)} style={{
+  background: '#ff6347',
+  color: 'white',
+  fontWeight: 700,
+  borderRadius: '8px',
+  border: 'none',
+  width: '100%',
+  height: '35px',
+  padding: '0 20px',
+  cursor: 'pointer',
+  transition: 'background 0.3s ease, transform 0.3s ease',
+  ":hover": {
+    background: '#ff4500',
+    transform: 'scale(1.05)',
+  }
+}}>
+  Delete
+</button>
                 </td>
               </tr>
             ))}

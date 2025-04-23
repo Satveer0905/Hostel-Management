@@ -88,7 +88,7 @@ function MaintenanceRequests() {
                     <button onClick={() => toggleStatus(req.id, req.status)} id='maintaince-button'>
                       Mark as {req.status === 'Resolved' ? 'Unresolved' : 'Resolved'}
                     </button>
-                    <button onClick={() => handleDelete(req.id)} id='maintaince-delete-button' style={{ marginLeft: '10px', backgroundColor: 'red', color: 'white' }}>
+                    <button onClick={() => handleDelete(req.id)} id='maintaince-delete-button' >
                       Delete
                     </button>
                   </td>

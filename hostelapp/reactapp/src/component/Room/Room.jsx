@@ -15,13 +15,23 @@ function Room() {
   });
 
   useEffect(() => {
-    const saved = JSON.parse(localStorage.getItem('rooms'));
-    if (saved) setRooms(saved);
+    // Fetch allocated rooms from backend on mount
+    const fetchRooms = async () => {
+      try {
+        const response = await fetch('http://localhost:3005/rooms');
+        const data = await response.json();
+        setRooms(data);
+      } catch (error) {
+        console.error('Failed to fetch rooms:', error);
+      }
+    };
+    fetchRooms();
   }, []);
 
-  useEffect(() => {
-    localStorage.setItem('rooms', JSON.stringify(rooms));
-  }, [rooms]);
+  // Remove localStorage usage for rooms state
+  // useEffect(() => {
+  //   localStorage.setItem('rooms', JSON.stringify(rooms));
+  // }, [rooms]);
 
   const handleChange = (field, value) => {
     setStudentInfo(prev => ({ ...prev, [field]: value }));
@@ -70,6 +80,29 @@ function Room() {
     });
   };
 
+  const deallocateRoom = async (roomId) => {
+    const confirmDelete = window.confirm("Are you sure you want to deallocate this room?");
+    if (!confirmDelete) {
+      return;
+    }
+    try {
+      const response = await fetch(`http://localhost:3005/rooms/${roomId}`, {
+        method: 'DELETE',
+      });
+      const result = await response.json();
+      if (result.msg === "Room deallocated successfully") {
+        setRooms(prevRooms => prevRooms.filter(room => room.roomId !== roomId));
+        setMessage(`✅ Room ${roomId} deallocated successfully.`);
+      } else {
+        setMessage('❌ Error deallocating room');
+      }
+      setTimeout(() => setMessage(''), 3000);
+    } catch (error) {
+      setMessage('❌ Error sending deallocation request to the server');
+      setTimeout(() => setMessage(''), 3000);
+    }
+  };
+
   const totalRooms = rooms.length;
 
   return (
@@ -99,12 +132,18 @@ function Room() {
           value={studentInfo.year}
           onChange={(e) => handleChange('year', e.target.value)}
         />
-        <input
-          type="text"
-          placeholder="Branch"
+        <select
           value={studentInfo.branch}
           onChange={(e) => handleChange('branch', e.target.value)}
-        />
+          required
+        >
+          <option value="">Select Branch</option>
+          <option value="Computer Science">Computer Science & Engineering</option>
+          <option value="Electrical">Electrical</option>
+          <option value="Mechanical">Mechanical</option>
+          <option value="Civil">Civil</option>
+          <option value="Electronics">Electronics</option>
+        </select>
         <select
           value={studentInfo.roomType}
           onChange={(e) => handleChange('roomType', e.target.value)}
@@ -128,6 +167,9 @@ function Room() {
           onChange={(e) => handleChange('roomId', e.target.value)}
         />
         <button onClick={allocateRoom}>Allocate Room</button>
+      </div>
+      <div className={styles.summary}>
+        <p><strong>Total Allocated Rooms:</strong> {totalRooms}</p>
       </div>
 
       <h3>Allocated Room Details</h3>
@@ -153,14 +195,15 @@ function Room() {
               <td>{room.roomType}</td>
               <td>{room.roomNo}</td>
               <td>{room.roomId}</td>
+              <td>
+                <button onClick={() => deallocateRoom(room.roomId)} className={styles.deallocateButton}>Deallocate</button>
+              </td>
             </tr>
           ))}
         </tbody>
       </table>
 
-      <div className={styles.summary}>
-        <p><strong>Total Allocated Rooms:</strong> {totalRooms}</p>
-      </div>
+      
     </div>
     </>
   );

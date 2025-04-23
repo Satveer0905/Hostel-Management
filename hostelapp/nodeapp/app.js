@@ -17,11 +17,19 @@ app.use(express.json());
     .catch(err => console.log(err));
 
 // MongoDB Schemas
+
 const roomSchema = new mongoose.Schema({
-    roomNumber: String,
-    roomType: String,
-    allocatedTo: String
+  name: { type: String, required: true },          
+  admissionNo: { type: String, required: true, unique: true },  
+  year: { type: String, required: true },            
+  branch: { type: String, required: true },          
+  roomType: { type: String, required: true },        
+  roomNo: { type: String, required: true },          
+  roomId: { type: String, required: true, unique: true } 
 });
+
+module.exports = mongoose.model('Room', roomSchema);
+
 
 const userSchema = new mongoose.Schema({
     name: String,
@@ -122,6 +130,46 @@ app.post('/rooms', async (req, res) => {
         res.json({ msg: "Room data saved successfully" });
     } catch (err) {
         res.json({ msg: "Error: " + err.message });
+    }
+});
+
+// Delete Room Data (Deallocate Room)
+app.delete('/rooms/:roomId', async (req, res) => {
+    try {
+        const { roomId } = req.params;
+        const deletedRoom = await Room.findOneAndDelete({ roomId });
+        if (deletedRoom) {
+            res.json({ msg: "Room deallocated successfully" });
+        } else {
+            res.status(404).json({ msg: "Room not found" });
+        }
+    } catch (err) {
+        res.status(500).json({ msg: "Error: " + err.message });
+    }
+});
+
+// Get All Rooms
+app.get('/rooms', async (req, res) => {
+    try {
+        const rooms = await Room.find();
+        res.json(rooms);
+    } catch (err) {
+        res.status(500).json({ msg: "Error fetching rooms", error: err.message });
+    }
+});
+
+// Delete Room Data (Deallocate Room)
+app.delete('/rooms/:roomId', async (req, res) => {
+    try {
+        const { roomId } = req.params;
+        const deletedRoom = await Room.findOneAndDelete({ roomId });
+        if (deletedRoom) {
+            res.json({ msg: "Room deallocated successfully" });
+        } else {
+            res.status(404).json({ msg: "Room not found" });
+        }
+    } catch (err) {
+        res.status(500).json({ msg: "Error: " + err.message });
     }
 });
 
