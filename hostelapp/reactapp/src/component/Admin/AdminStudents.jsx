@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './AdminStudents.css';
+import AdminLayout from './AdminLayout';
 
 const AdminStudents = () => {
   const [students, setStudents] = useState([]);
@@ -25,6 +26,8 @@ const AdminStudents = () => {
   if (error) return <div>{error}</div>;
 
   return (
+    <>
+    <AdminLayout/>
     <div className="admin-students-container">
       <h2>Students List</h2>
       <table className="admin-students-table">
@@ -52,6 +55,7 @@ const AdminStudents = () => {
         </tbody>
       </table>
     </div>
+    </>
   );
 };
 

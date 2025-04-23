@@ -91,6 +91,16 @@ app.get('/studentDetails/:email', async (req, res) => {
     }
 });
 
+// Get all student details
+app.get('/studentDetails', async (req, res) => {
+    try {
+        const allDetails = await StudentDetails.find();
+        res.json(allDetails);
+    } catch (err) {
+        res.status(500).json({ msg: "Error fetching all student details", error: err.message });
+    }
+});
+
 // Create student details
 app.post('/studentDetails', async (req, res) => {
     try {

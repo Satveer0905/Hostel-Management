@@ -49,7 +49,7 @@ function AdminDashboard() {
         <ul>
             <li onClick={() => navigate('/')}>Logo</li>
             <li onClick={() => navigate('/AdminDashboard')}>Dashboard</li>
-            <li>Students</li>
+            <li onClick={() => navigate('/AdminStudents')}>Students</li>
             <li onClick={() => navigate('/rooms')}>Room</li>
             <li onClick={() => navigate('/maintenanceReq')}>Maintenance</li>
             <li onClick={()=>navigate('/reportReq')}>Reports</li>
