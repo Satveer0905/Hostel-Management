@@ -50,7 +50,23 @@ const ReportReq = () => {
       alert('Error updating status: ' + (err.response?.data?.msg || err.message));
     }
   };
-  
+
+  const handleDelete = async (reportId) => {
+    if (!window.confirm("Are you sure you want to delete this report?")) return;
+
+    try {
+      const response = await axios.delete(`http://localhost:3005/report/${reportId}`);
+      if (response.status === 200) {
+        alert("Report deleted successfully");
+        fetchReports(); // Refresh data
+      } else {
+        alert("Failed to delete report");
+      }
+    } catch (error) {
+      console.error("Error deleting report:", error);
+      alert("Error deleting report: " + error.message);
+    }
+  };
 
   if (loading) return <div>Loading reports...</div>;
   if (error) return <div>{error}</div>;
@@ -73,6 +89,7 @@ const ReportReq = () => {
               <th>Admission No</th>
               <th>Description</th>
               <th>Status</th>
+              <th>Action</th>
             </tr>
           </thead>
           <tbody>
@@ -94,6 +111,11 @@ const ReportReq = () => {
                       </option>
                     ))}
                   </select>
+                </td>
+                <td>
+                  <button onClick={() => handleDelete(report._id)} style={{backgroundColor: 'red', color: 'white'}}>
+                    Delete
+                  </button>
                 </td>
               </tr>
             ))}

@@ -34,6 +34,10 @@ export default function AdminLayout() {
       <main className={'dashboard-content'}>
         <Outlet />
       </main>
+
+      <footer className="admin-footer">
+        <p>© 2024 Smart Hostel. All rights reserved.</p>
+      </footer>
     </div>
   );
 }

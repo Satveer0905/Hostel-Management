@@ -29,7 +29,29 @@ function Login() {
       if (res.msg === "success") {
         localStorage.setItem('studentName', res.user.name);
         localStorage.setItem('studentEmail', res.user.email);
-        navigate(role === 'administrator' ? "/AdminDashboard" : "/StudentDashboard");
+
+        if (role === 'administrator') {
+          navigate("/AdminDashboard");
+        } else {
+          // For student, check if personal details exist
+          fetch(`http://localhost:3005/studentDetails/${res.user.email}`)
+            .then(response => {
+              if (response.ok) {
+                // Details exist, go to dashboard
+                navigate("/StudentDashboard");
+              } else if (response.status === 404) {
+                // Details not found, go to details form
+                navigate("/StudentDetailsForm");
+              } else {
+                // Other errors, fallback to dashboard
+                navigate("/StudentDashboard");
+              }
+            })
+            .catch(() => {
+              // On error, fallback to dashboard
+              navigate("/StudentDashboard");
+            });
+        }
       } else {
         setError(res.msg || 'Login failed. Please try again.');
       }

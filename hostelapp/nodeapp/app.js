@@ -32,7 +32,10 @@ const userSchema = new mongoose.Schema({
 
 const maintenanceSchema = new mongoose.Schema({
     id: { type: Number, unique: true },
-    description: String,
+    studentName: String,
+    admissionNo: String,
+    roomId: String,
+    issue: String,
     status: { type: String, default: "Unresolved" }
 });
 
@@ -52,6 +55,64 @@ const Room = mongoose.model('Room', roomSchema);
 const User = mongoose.model('User', userSchema);
 const MaintenanceRequest = mongoose.model('MaintenanceRequest', maintenanceSchema);
 const Report = mongoose.model('Report', reportSchema);
+
+// Student Details Schema
+const studentDetailsSchema = new mongoose.Schema({
+    name: String,
+    phoneNo: String,
+    gender: String,
+    rollNo: String,
+    admissionNo: { type: String, unique: true },
+    email: { type: String, unique: true }
+});
+
+const StudentDetails = mongoose.model('StudentDetails', studentDetailsSchema);
+
+// Get student details by email
+app.get('/studentDetails/:email', async (req, res) => {
+    try {
+        const email = req.params.email;
+        const details = await StudentDetails.findOne({ email });
+        if (details) {
+            res.json(details);
+        } else {
+            res.status(404).json({ msg: "Student details not found" });
+        }
+    } catch (err) {
+        res.status(500).json({ msg: "Error fetching student details", error: err.message });
+    }
+});
+
+// Create student details
+app.post('/studentDetails', async (req, res) => {
+    try {
+        const { name, phoneNo, gender, admissionNo, email } = req.body;
+        const existing = await StudentDetails.findOne({ email });
+        if (existing) {
+            return res.status(400).json({ msg: "Student details already exist" });
+        }
+        const newDetails = new StudentDetails({ name, phoneNo, gender, admissionNo, email });
+        await newDetails.save();
+        res.json({ msg: "Student details saved successfully" });
+    } catch (err) {
+        res.status(500).json({ msg: "Error saving student details", error: err.message });
+    }
+});
+
+// Update student details by email
+app.put('/studentDetails/:email', async (req, res) => {
+    try {
+        const email = req.params.email;
+        const updateData = req.body;
+        const updated = await StudentDetails.findOneAndUpdate({ email }, updateData, { new: true });
+        if (!updated) {
+            return res.status(404).json({ msg: "Student details not found" });
+        }
+        res.json({ msg: "Student details updated successfully", updated });
+    } catch (err) {
+        res.status(500).json({ msg: "Error updating student details", error: err.message });
+    }
+});
 
 // Save Room Data
 app.post('/rooms', async (req, res) => {
@@ -134,6 +195,21 @@ app.put('/maintenance', async (req, res) => {
     }
 });
 
+// Delete Maintenance Request
+app.delete('/maintenance/:id', async (req, res) => {
+    try {
+        const requestId = req.params.id;
+        const deleted = await MaintenanceRequest.findOneAndDelete({ id: requestId });
+        if (deleted) {
+            res.json({ msg: "Maintenance request deleted successfully" });
+        } else {
+            res.status(404).json({ msg: "Maintenance request not found" });
+        }
+    } catch (err) {
+        res.status(500).json({ msg: "Error deleting maintenance request", error: err.message });
+    }
+});
+
 // Submit Reports
 app.post('/report', async (req, res) => {
     try {
@@ -180,6 +256,28 @@ app.put('/report/:id', async (req, res) => {
         res.json({ msg: "Report status updated successfully", updatedReport });
     } catch (err) {
         res.status(500).json({ msg: "Error updating report status", error: err.message });
+    }
+});
+
+// Delete Report
+app.delete('/report/:id', async (req, res) => {
+    try {
+        const reportId = req.params.id;
+
+        // Check for valid ObjectId
+        if (!mongoose.Types.ObjectId.isValid(reportId)) {
+            return res.status(400).json({ msg: "Invalid report ID format" });
+        }
+
+        const deletedReport = await Report.findByIdAndDelete(reportId);
+
+        if (!deletedReport) {
+            return res.status(404).json({ msg: "Report not found" });
+        }
+
+        res.json({ msg: "Report deleted successfully" });
+    } catch (err) {
+        res.status(500).json({ msg: "Error deleting report", error: err.message });
     }
 });
 

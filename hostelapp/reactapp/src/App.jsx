@@ -13,6 +13,7 @@ import Room from './component/Room/Room';
 import Report from './component/Student/Report';
 import MaintenanceRequests from './component/Admin/MaintenanceRequests';
 import ReportReq from './component/Admin/ReportReq';
+import StudentDetailsForm from './component/Student/StudentDetailsForm';
 
 function App() {
   return (
@@ -27,11 +28,10 @@ function App() {
         <Route path="/maintenanceReq" element={<MaintenanceRequests />} />
         <Route path="/AdminDashboard" element={<AdminDashboard />} />
         <Route path="/StudentDashboard" element={<StudentDashboard />} />
+        <Route path="/StudentDetailsForm" element={<StudentDetailsForm />} />
         <Route path="/rooms" element={<Room />} />
         <Route path="/report" element={<Report />} />
         <Route path="/reportReq" element={<ReportReq />} />
-        {/* <Route path="/maintenanceReq/Room/Room" element={<Room />} /> */}
-
       </Routes>
     </BrowserRouter>
   );

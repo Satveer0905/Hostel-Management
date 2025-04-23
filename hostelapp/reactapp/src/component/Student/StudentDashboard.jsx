@@ -34,6 +34,9 @@ function StudentDashboard() {
           <p><strong>Room Number:</strong> 101</p>
           <p><strong>Check-in Date:</strong> 2023-01-15</p>
           <p><strong>Check-out Date:</strong> 2023-12-15</p>
+          <button onClick={() => navigate('/StudentDetailsForm')} style={{marginTop: '10px'}}>
+            Edit Personal Details
+          </button>
         </div>
         <div className="student-dashboard__info-card">
           <h3>Services</h3>
