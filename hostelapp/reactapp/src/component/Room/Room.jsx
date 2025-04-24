@@ -183,6 +183,7 @@ function Room() {
             <th>Room Type</th>
             <th>Room No</th>
             <th>Room ID</th>
+            <th>Remove</th>
           </tr>
         </thead>
         <tbody>
