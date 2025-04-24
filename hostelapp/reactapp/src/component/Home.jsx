@@ -25,7 +25,7 @@ function Home() {
         {/* Nav links */}
         <ul className={`nav-links ${menuOpen ? 'open' : ''}`}>
           <li><Link to="/" onClick={() => setMenuOpen(false)}>Home</Link></li>
-          <li><Link to="/features" onClick={() => setMenuOpen(false)}>Features</Link></li>
+          <li><Link to="/feature" onClick={() => setMenuOpen(false)}>Features</Link></li>
           <li><Link to="/about" onClick={() => setMenuOpen(false)}>About</Link></li>
 
           {/* Hover Register with Popup */}
@@ -62,7 +62,7 @@ function Home() {
           Manage your hostel life effortlessly—stay organized, informed, and connected.
         </p>
         <div className="buttons">
-          <Link to="/features" className="btn explore">Explore Features</Link>
+          <Link to="/feature" className="btn explore">Explore Features</Link>
           <Link to="/login" className="btn login">Login to Get Started</Link>
         </div>
       </section>

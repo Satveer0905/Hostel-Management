@@ -21,10 +21,10 @@ const AboutUs = () => {
           <li><Link to="/" className="nav-link">Home</Link></li>
           <li><Link to="/features" className="nav-link">Features</Link></li>
           <li><Link to="/about" className="nav-link">About</Link></li>
+          
           <li><Link to="/contact" className="nav-link">Contact</Link></li>
         </ul>
       </header>
-
       {/* About Section */}
       <section className="about-section">
         <h1 className="about-title">About SmartHostel</h1>

@@ -20,7 +20,7 @@ export default function AdminLayout() {
 
       <nav className={'dashboard-nav'}>
         <ul>
-          <li onClick={() => navigate('/')}>Logo</li>
+          <li onClick={() => navigate('/')} id='Logo'>Logo</li>
           <li onClick={() => navigate('/AdminDashboard')}>Dashboard</li>
           <li onClick={() => navigate('/AdminStudents')}>Students</li>
           <li><Link to="/rooms" style={{textDecoration:'none', color:'#333'}}>Room</Link></li>

@@ -16,7 +16,7 @@ body {
   min-height: 100vh;
   width: 100%;
   padding: 0;
-  cursor: pointer;
+  
 }
 
 /* Navbar */
@@ -103,6 +103,7 @@ body {
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
   flex: 1 1 45%;
   text-align: left;
+  cursor: pointer;
   transition: transform 0.3s ease;
 }
 
@@ -131,6 +132,7 @@ body {
 }
 
 .about-benefits {
+  cursor: pointer;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -173,6 +175,7 @@ body {
 }
 
 .cta-button {
+  cursor: pointer;
   display: inline-block;
   background: white;
   color: #6200ea;

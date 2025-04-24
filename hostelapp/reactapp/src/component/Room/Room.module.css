@@ -1,7 +1,7 @@
 .room-container {
   padding: 40px 20px;
   max-width: 1000px;
-  margin: -100px auto;
+  margin: 20px auto;
   
   background: linear-gradient(to right, #ffffffcc, #f9f9f9cc);
   border-radius: 16px;

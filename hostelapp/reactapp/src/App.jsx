@@ -15,7 +15,7 @@ import MaintenanceRequests from './component/Admin/MaintenanceRequests';
 import ReportReq from './component/Admin/ReportReq';
 import StudentDetailsForm from './component/Student/StudentDetailsForm';
 import AdminStudents from './component/Admin/AdminStudents';
-
+import Feature from './component/Features/Feature';
 function App() {
   return (
     <BrowserRouter>
@@ -34,6 +34,7 @@ function App() {
         <Route path="/rooms" element={<Room />} />
         <Route path="/report" element={<Report />} />
         <Route path="/reportReq" element={<ReportReq />} />
+        <Route path="/feature" element={<Feature />} />
       </Routes>
     </BrowserRouter>
   );
