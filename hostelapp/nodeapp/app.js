@@ -58,6 +58,14 @@ const reportSchema = new mongoose.Schema({
     status: { type: String, default: "Not accepted" }
 });
 
+//Security key
+
+const securityKeySchema = new mongoose.Schema({
+    key: { type: String, required: true, unique: true },
+  });
+  
+  const SecurityKey = mongoose.model('SecurityKey', securityKeySchema);
+  
 // MongoDB Models
 const Room = mongoose.model('Room', roomSchema);
 const User = mongoose.model('User', userSchema);
@@ -184,9 +192,23 @@ app.delete('/rooms/:roomId', async (req, res) => {
 });
 
 // Register
+
 app.post('/register', async (req, res) => {
     try {
-        const { name, email, password, userType } = req.body;
+        const { name, email, password, userType, securityKey } = req.body;
+
+        // If the user is an administrator, verify the security key
+        console.log(securityKey);
+        
+        if (userType === 'administrator') {
+         console.log("Hi inside admin");
+            const validKey = await SecurityKey.find({ key: securityKey });
+            console.log(validKey);
+            if (!validKey) {
+                return res.json({ msg: "Invalid security key" });
+            }
+        }
+
         const existingUser = await User.findOne({ email });
         if (existingUser) return res.json({ msg: "Email is already registered" });
 
@@ -197,6 +219,20 @@ app.post('/register', async (req, res) => {
         res.json({ msg: "Error: " + err.message });
     }
 });
+
+// app.post('/register', async (req, res) => {
+//     try {
+//         const { name, email, password, userType } = req.body;
+//         const existingUser = await User.findOne({ email });
+//         if (existingUser) return res.json({ msg: "Email is already registered" });
+
+//         const newUser = new User({ name, email, password, userType });
+//         await newUser.save();
+//         res.json({ msg: "User successfully registered" });
+//     } catch (err) {
+//         res.json({ msg: "Error: " + err.message });
+//     }
+// });
 
 // Login
 app.post('/login', async (req, res) => {

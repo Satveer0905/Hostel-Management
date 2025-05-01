@@ -3,7 +3,8 @@ import 'bootstrap/dist/css/bootstrap.css';
 import './Registration.css'; // Make sure to import your CSS file
 
 function Registration() {
-    const [userType, setUserType] = useState('student'); // State to hold the user type
+    const [userType, setUserType] = useState('student'); 
+    const [securityKey, setSecurityKey] = useState(''); 
 
     async function sendData(e) {
         e.preventDefault();
@@ -11,9 +12,15 @@ function Registration() {
         const email = e.target.email.value;
         const password = e.target.password.value;
 
+        
+        if (userType === 'administrator' && !securityKey) {
+            alert("Security key is required for administrators");
+            return;
+        }
+
         const response = await fetch("http://localhost:3005/register", {
             method: "POST",
-            body: JSON.stringify({ name, email, password, userType }), // Include userType in the request
+            body: JSON.stringify({ name, email, password, userType, securityKey }),
             headers: { 'Content-Type': 'application/json' }
         });
         const res = await response.json();
@@ -21,8 +28,8 @@ function Registration() {
     }
 
     return (
-        <div className="registration-wrapper"> {/* Wrapper for the registration form */}
-            <div className="registration-container"> {/* Container for styling */}
+        <div className="registration-wrapper">
+            <div className="registration-container">
                 <h2 id="registrationHeading">Registration</h2>
                 <form onSubmit={sendData}>
                     <div className="form-group">
@@ -55,12 +62,26 @@ function Registration() {
                     <div className="form-group">
                         <label htmlFor="exampleInputEmail1">Email address</label>
                         <input type="email" name="email" required className="form-control" id="exampleInputEmail1" placeholder="Enter email" />
-                        <small id="emailHelp" className="form-text text-muted"></small>
                     </div>
                     <div className="form-group">
                         <label htmlFor="exampleInputPassword1">Password</label>
                         <input type="password" name="password" required className="form-control" id="exampleInputPassword1" placeholder="Password" />
                     </div>
+                    {/* Security Key input for Admins */}
+                    {userType === 'administrator' && (
+                        <div className="form-group">
+                            <label htmlFor="securityKey">Security Key</label>
+                            <input
+                                type="text"
+                                name="securityKey"
+                                className="form-control"
+                                id="securityKey"
+                                placeholder="Enter security key"
+                                value={securityKey}
+                                onChange={(e) => setSecurityKey(e.target.value)}
+                            />
+                        </div>
+                    )}
                     <button type="submit" className="btn btn-primary">Submit</button>
                 </form>
             </div>
